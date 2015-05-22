@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:t="http://myfaces.apache.org/tomahawk"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>My VCard to PDF</title>
+        <meta charset="utf-8"></meta>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<h:outputStylesheet library="default" name="css/bootstrap-3.2.0-dist/css/bootstrap.min.css"/>
+		<h:outputScript library="default" name="javascript/jquery.min.js"/>
+		<h:outputScript library="default" name="css/bootstrap-3.2.0-dist/js/bootstrap.min.js"/>
+    </h:head>
+    <h:body>
+    	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<br/><br/>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Convertir une carte de visite vCard (fichier .vcf) en pdf </h3>
+						</div>
+						<div class="panel-body">
+							<font size="3em">	
+								Entrez le nom que vous souhaitez donné à votre fichier pdf, sélectionnez votre fichier vCard et cliquez sur "Charger le fichier"<br/><br/>			
+								<h:messages styleClass="alert alert-danger" for="pdfFileName"/>
+								<h:messages styleClass="alert alert-danger" for="vcfFile"/>
+								
+								<h:form enctype="multipart/form-data" styleClass="form-horizontal" role="form">
+    								<div class="form-group">
+										<h:outputLabel for="pdfFileName" 
+													   value="Nom de votre fichier pdf : " 
+													   styleClass="col-sm-3 control-label"/>
+										<div class="col-sm-4 input-group">
+											<h:inputText id="pdfFileName" 
+														 value="#{ fileUploadBean.pdfFileName }"
+														 validator="#{fileUploadBean.validateFileName}" 
+														 styleClass="form-control" 
+														 maxlength="#{fileUploadBean.maxCharForName}" 
+														 aria-describedby="basic-addon2"/>
+											<span class="input-group-addon" id="basic-addon2">.pdf </span>
+										</div>
+									 </div>
+								
+									<div class="form-group">
+										<t:outputLabel for="vcfFile" value ="Votre fichier vcf * : " 
+													   styleClass="col-sm-3 control-label"/>
+										<div class="col-sm-4 input-group">
+											<t:inputFileUpload id="vcfFile" 
+																value="#{ fileUploadBean.vcfFile }" 
+																validator="#{ fileUploadBean.validate }" 
+																required="true"
+																requiredMessage="Vous devez sélectionner un fichier"
+																accept=".vcf"
+																styleClass="form-control"/>
+																
+											<t:outputText value="Taille maximum du fichier vCard : #{fileUploadBean.maxSizeFile}Mo"/>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-2">
+										    <h:commandButton value="Charger le fichier" 
+										   					action="download"
+										   					styleClass="btn btn-default btn-lg " />
+									   </div>
+								   </div>
+								</h:form>
+							</font> 
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </h:body>
+</html>

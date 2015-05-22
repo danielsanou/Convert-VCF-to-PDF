@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:t="http://myfaces.apache.org/tomahawk"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+    	<title>My VCard to PDF</title>
+        <meta charset="utf-8"></meta>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+	    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+		<h:outputStylesheet library="default" name="css/bootstrap-3.2.0-dist/css/bootstrap.min.css"/>
+		<h:outputScript library="default" name="javascript/jquery.min.js"/>
+		<h:outputScript library="default" name="css/bootstrap-3.2.0-dist/js/bootstrap.min.js"/>
+    </h:head>
+    <h:body>
+    	<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<br/><br/>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3>Convertir une carte de visite vCard (fichier .vcf) en pdf </h3>
+						</div>
+						<div class="panel-body">
+							<font size="3em">
+									
+									
+						    	Votre fichier à bien été chargé, vous pouvez le convertir et télécharger le pdf dès à présent<br/>
+						    	<b>Nom : </b> #{fileUploadBean.vcfFile.name}<br/>
+						    	<b>Taille : </b> #{fileUploadBean.vcfFile.size/1000}Ko<br/>
+						    	<b>Nombre de contacts : </b> #{fileUploadBean.getContent().size()}<br/>						    	
+						    	#{fileUploadBean.getPdfNameMessage()}<br/><br/><br/>
+						    	
+						    	<h:form>
+						    		<h:messages styleClass="alert alert-danger" />
+						    		<h:commandButton value="Convertir et élécharger le pdf"  
+						    						 action="#{fileUploadBean.convert}"
+						    						 styleClass="btn btn-default btn-lg"/>
+						    	</h:form>
+						    </font>
+						    <b>NB : </b><h:outputText value="Un identifient unique sera ajouter au nom du fichier, lors de son téléchargement, pour éviter les conflits"/>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </h:body>
+</html>
